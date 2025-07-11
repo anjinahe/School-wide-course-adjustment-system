@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ class_id }}班 - 课表大屏</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .screen-container {
+            background-color: #f0f8ff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .class-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .class-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .schedule-table th,
+        .schedule-table td {
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #3498db;
+        }
+        .schedule-table th {
+            background-color: #3498db;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .schedule-table tr:nth-child(even) {
+            background-color: #e8f4fd;
+        }
+        .course-cell {
+            font-size: 1.1rem;
+        }
+        .adjustment-notice {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s;
+        }
+        .notice-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-container">
+        <div class="class-header">
+            <h1 class="class-title">{{ class_id }}班 实时课表</h1>
+            <div class="update-time">最后更新: <span id="lastUpdate"></span></div>
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>时间段</th>
+                    <th>课程</th>
+                    <th>教师</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="scheduleBody">
+                <tr><td colspan="4" class="loading">加载中...</td></tr>
+            </tbody>
+        </table>
+
+        <div id="adjustmentNotices"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/screen.js') }}"></script>
+</body>
+</html>
